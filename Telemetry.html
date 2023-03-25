@@ -1,0 +1,327 @@
+<!-- Wyatt Gilmore -->
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UAT Sat Data</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+	header {
+			background-color: #031E4C;
+			padding: 20px;
+			text-align: center;
+			border-bottom: 1px solid #FFFFFF;
+		}
+
+		h1 {
+			margin: 0;
+			font-size: 48px;
+			letter-spacing: 5px;
+		}
+
+		nav {
+			margin-top: 20px;
+		}
+
+		nav ul {
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+			display: flex;
+			justify-content: center;
+		}
+
+		nav li {
+			margin: 0 20px;
+			font-size: 24px;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			border-bottom: 2px solid transparent;
+			transition: border-bottom 0.3s ease;
+		}
+
+		nav li:hover {
+			border-bottom: 2px solid #FFFFFF;
+		}
+
+		nav li:last-child {
+			margin-right: 0;
+		}
+
+		nav li a {
+			color: #FFFFFF;
+			text-decoration: none;
+			padding: 10px 0;
+			display: block;
+		}
+
+    h1 {
+      margin: 0;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 50%;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>UAT Satellite Sensor Data</h1>
+			<a href="index.html" class="login-btn">Login</a>
+		<nav>
+			<ul>
+				<li><a href="Telemetry.html">Telemetry Data</a></li>
+				<li><a href="countdown.html">Launch Control</a></li>
+				<li><a href="main.html"> Home</a></li>
+				<li><a href="index.html"> Login</a></li>
+			</ul>
+		</nav>
+  </header>
+  <main>
+    <table>
+      <tr>
+        <th>Sensor</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Accelerometer X</td>
+        <td id="accelerometerXValue"></td>
+      </tr>
+      <tr>
+        <td>Accelerometer Y</td>
+        <td id="accelerometerYValue"></td>
+      </tr>
+      <tr>
+        <td>Accelerometer Z</td>
+        <td id="accelerometerZValue"></td>
+      </tr>
+      <tr>
+        <td>Gyro X</td>
+        <td id="gyroXValue"></td>
+      </tr>
+      <tr>
+        <td>Gyro Y</td>
+        <td id="gyroYValue"></td>
+      </tr>
+      <tr>
+        <td>Gyro Z</td>
+        <td id="gyroZValue"></td>
+      </tr>
+      <tr>
+        <td>Magnet X</td>
+        <td id="magnetXValue"></td>
+      </tr>
+      <tr>
+        <td>Magnet Y</td>
+        <td id="magnetYValue"></td>
+      </tr>
+      <tr>
+        <td>Magnet Z</td>
+        <td id="magnetZValue"></td>
+      </tr>
+      <tr>
+        <td>Magnet Value</td>
+        <td id="magnetValue"></td>
+      </tr>
+      <tr>
+        <td>Temperature</td>
+        <td id="temperatureValue"></td>
+      </tr>
+      <tr>
+        <td>Humidity</td>
+        <td id="humidityValue"></td>
+      </tr>
+      <tr>
+        <td>Pressure</td>
+        <td id="pressureValue"></td>
+      </tr>
+      <tr>
+        <td>Altitude</td>
+        <td id="altitudeValue"></td>
+      </tr>
+      <tr>
+        <td>Latitude</td>
+        <td id="latitudeValue"></td>
+      </tr>
+      <tr>
+        <td>Longitude</td>
+        <td id="longitudeValue"></td>
+      </tr>
+      <tr>
+        <td>Runtime</td>
+        <td id="runtimeValue"></td>
+      </tr>
+    </table>
+    <button id="startButton">Start</button>
+  </main>
+ <script type="text/javascript"> 
+    // initial sensor data
+    let sensorData = {
+      accelerometer: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+      gyro: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+      magnet: {
+        x: 0,
+        y: 0,
+        z: 0,
+        value: 0,
+      },
+      temperature: {
+        value: 0,
+      },
+      humidity: {
+        value: 0,
+      },
+      pressure: {
+        value: 0,
+      },
+      altitude: {
+        value: 0,
+      },
+      latitude: {
+        value: 0,
+      },
+      longitude: {
+        value: 0,
+      },
+      runtime: {
+        value: 0,
+      },
+    };
+
+    // generate new sensor data
+    let dataIndex = 0;
+    function generateSensorData() {
+      // accelerometer
+      sensorData.accelerometer.x = (Math.random() * 20 - 10).toFixed(2);
+      sensorData.accelerometer.y = (Math.random() * 20 - 10).toFixed(2);
+      sensorData.accelerometer.z = (Math.random() * 20 - 10).toFixed(2);
+
+      // gyro
+      sensorData.gyro.x = (Math.random() * 100 - 50).toFixed(2);
+      sensorData.gyro.y = (Math.random() * 100 - 50).toFixed(2);
+      sensorData.gyro.z = (Math.random() * 100 - 50).toFixed(2);
+
+      // magnet
+      sensorData.magnet.x = (Math.random() * 1000 - 500).toFixed(2);
+      sensorData.magnet.y = (Math.random() * 1000 - 500).toFixed(2);
+      sensorData.magnet.z = (Math.random() * 1000 - 500).toFixed(2);
+      sensorData.magnet.value = Math.sqrt(sensorData.magnet.x ** 2 + sensorData.magnet.y ** 2 + sensorData.magnet.z ** 2).toFixed(2);
+
+      // temperature
+      sensorData.temperature.value = (Math.random() * 30 + 10).toFixed(1);
+
+      // humidity
+      sensorData.humidity.value = (Math.random() * 50 + 50).toFixed(1);
+
+      // pressure
+      sensorData.pressure.value = (Math.random() * 1000 + 900).toFixed(1);
+
+      // altitude
+      const now = new Date();
+      const altitude = 1000 + Math.sin(now.getSeconds() / 60 * Math.PI * 2) * 100;
+      sensorData.altitude.value = altitude.toFixed(2);
+
+      // latitude
+      const latitude = 36.998979 + Math.sin(now.getSeconds() / 60 * Math.PI * 2) * 0.01;
+      sensorData.latitude.value = latitude.toFixed(4);
+
+      // longitude
+      const longitude = -122.060619 + Math.cos(now.getSeconds() / 60 * Math.PI * 2) * 0.01;
+      sensorData.longitude.value = longitude.toFixed(4);
+
+      // runtime
+      sensorData.runtime.value += 1;
+    }
+
+    // update sensor data table
+    function updateTable() {
+      document.getElementById("accelerometerXValue").textContent = sensorData.accelerometer.x;
+      document.getElementById("accelerometerYValue").textContent = sensorData.accelerometer.y;
+      document.getElementById("accelerometerZValue").textContent = sensorData.accelerometer.z;
+      document.getElementById("gyroXValue").textContent = sensorData.gyro.x;
+      document.getElementById("gyroYValue").textContent = sensorData.gyro.y;
+      document.getElementById("gyroZValue").textContent = sensorData.gyro.z;
+      document.getElementById("magnetXValue").textContent = sensorData.magnet.x;
+      document.getElementById("magnetYValue").textContent = sensorData.magnet.y;
+      document.getElementById("magnetZValue").textContent = sensorData.magnet.z;
+      document.getElementById("magnetValue").textContent = sensorData.magnet.value;
+      document.getElementById("temperatureValue").textContent = sensorData.temperature.value;
+      document.getElementById("humidityValue").textContent = sensorData.humidity.value;
+      document.getElementById("pressureValue").textContent = sensorData.pressure.value;
+      document.getElementById("altitudeValue").textContent = sensorData.altitude.value;
+      document.getElementById("latitudeValue").textContent = sensorData.latitude.value;
+      document.getElementById("longitudeValue").textContent = sensorData.longitude.value;
+      document.getElementById("runtimeValue").textContent = sensorData.runtime.value.toFixed(1);
+    }
+
+    // toggle sensor data updates
+    let intervalId = null;
+    function toggleSensorData() {
+      if (!intervalId) {
+        intervalId = setInterval(() => {
+          generateSensorData();
+          updateTable();
+        }, 1000);
+        document.getElementById("startButton").textContent = "Stop";
+      } else {
+        clearInterval(intervalId);
+        intervalId = null;
+        document.getElementById("startButton").textContent = "Start";
+      }
+    }
+
+    // attach event listener to start button
+    document.getElementById("startButton").addEventListener("click", toggleSensorData);
+  </script>
+</body
+</html>

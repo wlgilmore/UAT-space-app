@@ -1,0 +1,140 @@
+<!-- Wyatt Gilmore -->
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Satellite Control Interface</title>
+	<style>
+		body {
+			background-color: #001540;
+			color: #FFFFFF;
+			font-family: 'Segoe UI', sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		header {
+			background-color: #031E4C;
+			padding: 20px;
+			text-align: center;
+			border-bottom: 1px solid #FFFFFF;
+		}
+
+		h1 {
+			margin: 0;
+			font-size: 48px;
+			letter-spacing: 5px;
+		}
+
+		nav {
+			margin-top: 20px;
+		}
+
+		nav ul {
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+			display: flex;
+			justify-content: center;
+		}
+
+		nav li {
+			margin: 0 20px;
+			font-size: 24px;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			border-bottom: 2px solid transparent;
+			transition: border-bottom 0.3s ease;
+		}
+
+		nav li:hover {
+			border-bottom: 2px solid #FFFFFF;
+		}
+
+		nav li:last-child {
+			margin-right: 0;
+		}
+
+		nav li a {
+			color: #FFFFFF;
+			text-decoration: none;
+			padding: 10px 0;
+			display: block;
+		}
+
+		main {
+			max-width: 960px;
+			margin: 0 auto;
+			padding: 50px 20px;
+		}
+
+		h2 {
+			font-size: 36px;
+			letter-spacing: 2px;
+			margin-top: 0;
+		}
+
+		p {
+			font-size: 18px;
+			line-height: 1.5;
+			margin-bottom: 20px;
+		}
+
+		a {
+			color: #FFFFFF;
+			text-decoration: none;
+			background-color: #0D47A1;
+			padding: 10px 20px;
+			border-radius: 5px;
+			display: inline-block;
+			transition: background-color 0.3s ease;
+		}
+
+		a:hover {
+			background-color: #1565C0;
+		}
+
+		footer {
+			background-color: #031E4C;
+			padding: 20px;
+			text-align: center;
+			border-top: 1px solid #FFFFFF;
+			color: #FFFFFF;
+			font-size: 14px;
+			margin-top: 50px;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>UAT Satellite Control Interface</h1>
+		<a href="index.html" class="login-btn">Login</a>
+		<nav>
+			<ul>
+				<li><a href="Telemetry.html">Telemetry Data</a></li>
+				<li><a href="countdown.html">Launch Control</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<main>
+		<section>
+			<h2>Telemetry Data</h2>
+			<p>View real-time data from the satellite's sensors and systems.</p>
+			<a href="Telemetry.html">View Telemetry Data</a>
+		</section>
+
+		<section>
+			<h2>Launch Control</h2>
+			<p>Access controls for launching the satellite and performing mission-critical operations.</p>
+			<a href="countdown.html">Launch Control</a>
+		</section>
+	</main>
+
+	<footer>
+		<p>&copy; 2023 Satellite Control Interface</p>
+	</footer>
+</body>
+</html>

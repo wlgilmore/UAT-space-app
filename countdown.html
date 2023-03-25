@@ -1,0 +1,166 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>UAT Satellite Control Center</title> 
+	<style> 
+		body { 
+			background-image: url('https://cdn.pixabay.com/photo/2020/03/21/14/45/rocket-4954229_960_720.jpg'); 
+			background-repeat: no-repeat; 
+			background-size: cover; 
+			color: white; 
+			font-family: Arial, sans-serif; 
+			font-size: 20px; 
+			line-height: 1.5; 
+			padding: 20px; 
+		} 
+		button {
+			background-color: #4CAF50; /* Green */
+			border: none;
+			color: white;
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+		}
+		.warning {
+			font-weight: bold;
+			color: red;
+		}
+		header {
+			background-color: #031E4C;
+			padding: 20px;
+			text-align: center;
+			border-bottom: 1px solid #FFFFFF;
+		}
+
+		h1 {
+			margin: 0;
+			font-size: 48px;
+			letter-spacing: 5px;
+		}
+
+		nav {
+			margin-top: 20px;
+		}
+
+		nav ul {
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+			display: flex;
+			justify-content: center;
+		}
+
+		nav li {
+			margin: 0 20px;
+			font-size: 24px;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			border-bottom: 2px solid transparent;
+			transition: border-bottom 0.3s ease;
+		}
+
+		nav li:hover {
+			border-bottom: 2px solid #FFFFFF;
+		}
+
+		nav li:last-child {
+			margin-right: 0;
+		}
+
+		nav li a {
+			color: #FFFFFF;
+			text-decoration: none;
+			padding: 10px 0;
+			display: block;
+		}
+
+	</style> 
+<script type="text/javascript">
+		
+		// Set the starting count adn variable
+		var count = 10;
+		var timer;
+		var stopped = true;
+
+		// Display the initial count
+		document.getElementById("countdown").innerHTML = count;
+
+		function startCountdown() {
+			// Always reset the countdown timer to 10 when 0
+			if (count == 0) {
+				count = 10;
+			}
+
+			// If count is less than or equal to zero, display the "Blastoff!" message and return without starting the timer
+			if (count <= 0) {
+				document.getElementById("countdown").innerHTML = "Blastoff!";
+				return;
+			}
+
+			// Resume the countdown timer if it is already running
+			if (timer) {
+				return;
+			}
+
+			// Create a timer that counts down by one second
+			timer = setInterval(function() {
+				count--;
+
+				// Display the countdown timer value and the warning message if applicable
+				if (count <= 5 && count > 0) {
+					document.getElementById("countdown").innerHTML = count + " -<span class='warning'>Warning Less than ½ way to launch!</span>";
+				} else if (count >= 0) {
+					document.getElementById("countdown").innerHTML = count;
+				}
+
+				// If the count reaches zero, stop the timer and display the "Blastoff!" message
+				if (count == 0) {
+					clearInterval(timer);
+					timer = null;
+					document.getElementById("countdown").innerHTML = "Blastoff!";
+				}
+			}, 1000);
+
+			stopped = false;
+		}
+
+		function stopCountdown() {
+			// Stop the countdown timer if it is already running
+			if (timer) {
+				clearInterval(timer);
+				timer = null;
+				stopped = true;
+			} else if (count != 10) {
+				// Restart the countdown timer if it is stopped and not already at 10
+				count = 10;
+				document.getElementById("countdown").innerHTML = count;
+				stopped = false;
+			}
+		}
+	</script>
+<nav>
+			<ul>
+				<li><a href="Telemetry.html">Telemetry Data</a></li>
+				<li><a href="countdown.html">Launch Control</a></li>
+				<li><a href="main.html"> Home</a></li>
+				<li><a href="index.html"> Login</a></li>
+			</ul>
+		</nav>
+</head>
+<body>
+  <img src= "https://www.uattech.com/hs-fs/hubfs/UAT%20Black.png?width=391&name=UAT%20Black.png">
+  
+    <p><h1>UAT SPACE LAUNCH PROGRAM</h1></p>
+    <h2>Countdown T-Minus:</h2>
+	<h2><p id="countdown">10</p></h2>
+	<div id="countdown" class="warning"></div>
+	<button onclick="startCountdown()">Start/Continue</button>
+	<button onclick="stopCountdown()">Stop/Reset</button>
+
+</body>
+</html>

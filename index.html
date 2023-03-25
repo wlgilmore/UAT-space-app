@@ -1,0 +1,98 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>UAT Satellite Control Center</title> 
+
+	<style> 
+		body { 
+			background-image: url('https://cdn.pixabay.com/photo/2016/10/20/18/35/earth-1756274_960_720.jpg'); 
+			background-repeat: no-repeat; 
+			background-size: cover; 
+			color: white; 
+			font-family: Arial, sans-serif; 
+			font-size: 20px; 
+			line-height: 1.5; 
+			padding: 20px; 
+		} 
+		form { 
+			background-color: rgba(255, 255, 255, 0.5); 
+			padding: 20px; 
+			border-radius: 10px; 
+			max-width: 500px; 
+			margin: 0 auto; 
+		} 
+		label {
+			display: block; 
+			margin-bottom: 10px; 
+		} 
+		input[type="text"], 
+		input[type="number"] { 
+			padding: 5px; 
+			border-radius: 5px; 
+			border: none; 
+			margin-bottom: 10px; 
+			width: 100%; 
+			box-sizing: border-box; 
+		} 
+		input[type="submit"] { 
+			background-color: #4CAF50; 
+			color: black; 
+			border: none; 
+			border-radius: 5px; 
+			padding: 10px 20px; 
+			cursor: pointer; 
+		} 
+		input[type="submit"]:hover { 
+			background-color: #3e8e41; 
+		} 
+	</style> 
+	<script type="text/javascript">
+		function validateForm() { 
+			var firstName = document.forms["loginForm"]["firstName"].value; 
+			var lastName = document.forms["loginForm"]["lastName"].value; 
+			var badgeNumber = document.forms["loginForm"]["badgeNumber"].value; 
+			var allowedFirstNames = ["alice", "bob", "charlie", "david"]; 
+			var allowedLastNames = ["smith", "jones", "brown", "duchovny"];
+			var allowedBadgeNumbers = ["123", "456", "789", "420"]; 
+			if (firstName == "" || lastName == "" || badgeNumber == "") { 
+				alert("Please fill in all fields."); 
+				return false; 
+			} 
+			else if (firstName.length > 20 || lastName.length > 20) { 
+				alert("Name should be 20 characters or less."); 
+				return false; 
+			} 
+			else if (!allowedFirstNames.includes(firstName) || !allowedLastNames.includes(lastName)) { 
+				alert("User not allowed."); 
+				return false; 
+			} 
+			else if (!allowedBadgeNumbers.includes(badgeNumber)) { 
+				alert("Badge number not allowed."); 
+				return false; 
+			} 
+ 
+			else {
+				alert ("Welcome"+" " + firstName + " " + lastName + "!");
+				window.location.href = "main.html";
+				return false;
+			}
+		} 
+	</script> 
+</head> 
+<body> 
+    <img src= "https://www.uattech.com/hs-fs/hubfs/UAT%20Black.png?width=391&name=UAT%20Black.png">
+	<h1>UAT Satellite Control Center</h1> 
+	<form name="loginForm" onsubmit="return validateForm()" method="post"> 
+		<label for="firstName">First Name:</label> 
+		<input type="text" id="firstName" name="firstName" maxlength="20"><br> 
+		<label for="lastName">Last Name:</label> 
+		<input type="text" id="lastName" name="lastName" maxlength="20"><br> 
+		<label for="badgeNumber">Badge Number:</label> 
+		<input type="number" id="badgeNumber" name="badgeNumber" max="999"><br> 
+		<input type="submit" value="Login">
+	</form>
+</body> 
+</html> 
